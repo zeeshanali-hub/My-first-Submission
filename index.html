@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pizza Planet - The Best Food in the Universe">
+    <title>Pizza Planet | Enterprise Edition</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--
+         HEADER & NAVIGATION
+    -->
+    <header id="main-header" class="navbar">
+        <div class="container nav-flex">
+            
+            <!-- Brand Logo -->
+            <a href="#" onclick="app.router('home')" class="brand-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-pizza-slice"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>PIZZA PLANET</h1>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-menu">
+                <ul class="nav-list">
+                    <li><a href="#" onclick="app.router('home')" class="nav-link active" data-target="home">HOME</a></li>
+                    <li><a href="#" onclick="app.router('menu')" class="nav-link" data-target="menu">MENU</a></li>
+                    <li><a href="#" onclick="app.router('services')" class="nav-link" data-target="services">SERVICES</a></li>
+                    <li><a href="#" onclick="app.router('blog')" class="nav-link" data-target="blog">BLOG</a></li>
+                    <li><a href="#" onclick="app.router('about')" class="nav-link" data-target="about">ABOUT</a></li>
+                    <li><a href="#" onclick="app.router('contact')" class="nav-link" data-target="contact">CONTACT</a></li>
+                    <li><a href="#" onclick="app.router('feedback')" class="nav-link" data-target="feedback">FEEDBACK</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="nav-actions">
+                <button class="action-btn search-trigger" onclick="app.toggleSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <button class="action-btn cart-trigger" onclick="app.toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="header-cart-count" class="badge">0</span>
+                </button>
+                
+                <button class="action-btn mobile-toggle" onclick="app.toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu-container">
+        <div class="mobile-header">
+            <h3>Menu</h3>
+            <button onclick="app.toggleMobileMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="mobile-list">
+            <li><a href="#" onclick="app.router('home')">Home</a></li>
+            <li><a href="#" onclick="app.router('menu')">Menu</a></li>
+            <li><a href="#" onclick="app.router('services')">Services</a></li>
+            <li><a href="#" onclick="app.router('blog')">Blog</a></li>
+            <li><a href="#" onclick="app.router('about')">About</a></li>
+            <li><a href="#" onclick="app.router('contact')">Contact</a></li>
+        </ul>
+    </div>
+
+    <!--
+         MAIN APPLICATION CONTENT
+     -->
+    <main id="app-root">
+
+        <!-- 1. HOME SECTION -->
+        <section id="home" class="view active-view">
+            <div class="hero-slider">
+                <div class="slide-content">
+                    <span class="subtitle">PREMIUM QUALITY</span>
+                    <h1 class="hero-title">TASTE THE <br> <span class="text-highlight">UNIVERSE</span></h1>
+                    <p class="hero-desc">
+                        Experience the finest flavors sourced from across the galaxy. 
+                        Delivered hot, fresh, and within 30 minutes or it's free.
+                    </p>
+                    <div class="cta-group">
+                        <button class="btn btn-primary" onclick="app.router('menu')">ORDER NOW</button>
+                        <button class="btn btn-outline" onclick="app.router('about')">OUR STORY</button>
+                    </div>
+                </div>
+                <div class="hero-overlay"></div>
+            </div>
+
+            <div class="container features-section">
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fas fa-rocket"></i></div>
+                    <h3>Fast Delivery</h3>
+                    <p>We deliver at warp speed to ensure your food arrives piping hot.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fas fa-leaf"></i></div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>Daily sourced organic vegetables and premium meats.</p>
+                </div>
+                <div class="feature-box feature-card">
+                    <div class="icon-box"><i class="fas fa-user-astronaut"></i></div>
+                    <h3>Master Chefs</h3>
+                    <p>Cooked by award-winning chefs with passion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MENU SECTION (30+ Items Hardcoded for Line Count) -->
+        <section id="menu" class="view">
+            <div class="page-header">
+                <div class="container">
+                    <h2 class="section-title">OUR MENU</h2>
+                    <p class="section-subtitle">Explore our wide range of delicious options</p>
+                </div>
+            </div>
+
+            <div class="container menu-wrapper">
+                <!-- Menu Filters -->
+                <div class="menu-filters">
+                    <button class="filter-btn active" onclick="app.filterMenu('all', this)">All</button>
+                    <button class="filter-btn" onclick="app.filterMenu('pizza', this)">Pizzas</button>
+                    <button class="filter-btn" onclick="app.filterMenu('burger', this)">Burgers</button>
+                    <button class="filter-btn" onclick="app.filterMenu('sides', this)">Sides</button>
+                    <button class="filter-btn" onclick="app.filterMenu('drinks', this)">Drinks</button>
+                </div>
+
+                <!-- Product Grid - 32 ITEMS -->
+                <div id="products-grid" class="products-grid">
+                    <!-- Note: JS logic also exists, but HTML is explicitly written here to meet the 30 image tag requirement -->
+                    
+                    <!-- PIZZAS (8 Items) -->
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p1.jpg" alt="Margherita">
+                            <span class="tag">Best Seller</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Margherita Supreme</h3>
+                            <p>Classic tomato sauce, fresh mozzarella, basil.</p>
+                            <div class="price-row">
+                                <span class="price">$12.99</span>
+                                <button class="add-btn" onclick="app.addToCart(101)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p2.jpg" alt="Pepperoni">
+                        </div>
+                        <div class="card-details">
+                            <h3>Pepperoni Feast</h3>
+                            <p>Loaded with double pepperoni.</p>
+                            <div class="price-row">
+                                <span class="price">$14.99</span>
+                                <button class="add-btn" onclick="app.addToCart(102)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p3.jpg" alt="BBQ Chicken">
+                        </div>
+                        <div class="card-details">
+                            <h3>BBQ Chicken</h3>
+                            <p>Smoky BBQ sauce, chicken, red onions.</p>
+                            <div class="price-row">
+                                <span class="price">$15.50</span>
+                                <button class="add-btn" onclick="app.addToCart(103)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p4.jpg" alt="Meat Lovers">
+                            <span class="tag">Spicy</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Meat Lovers</h3>
+                            <p>Sausage, bacon, ham, beef.</p>
+                            <div class="price-row">
+                                <span class="price">$16.99</span>
+                                <button class="add-btn" onclick="app.addToCart(104)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p5.jpg" alt="Veggie">
+                        </div>
+                        <div class="card-details">
+                            <h3>Veggie Garden</h3>
+                            <p>Peppers, olives, onions, mushrooms.</p>
+                            <div class="price-row">
+                                <span class="price">$13.50</span>
+                                <button class="add-btn" onclick="app.addToCart(105)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p6.jpg" alt="Hawaiian">
+                        </div>
+                        <div class="card-details">
+                            <h3>Hawaiian Sunset</h3>
+                            <p>Ham and fresh pineapple chunks.</p>
+                            <div class="price-row">
+                                <span class="price">$14.00</span>
+                                <button class="add-btn" onclick="app.addToCart(106)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p7.jpg" alt="Buffalo">
+                        </div>
+                        <div class="card-details">
+                            <h3>Buffalo Chicken</h3>
+                            <p>Spicy buffalo sauce, ranch drizzle.</p>
+                            <div class="price-row">
+                                <span class="price">$15.00</span>
+                                <button class="add-btn" onclick="app.addToCart(107)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="pizza">
+                        <div class="card-image">
+                            <img src="p8.jpg" alt="Mushroom">
+                        </div>
+                        <div class="card-details">
+                            <h3>Truffle Mushroom</h3>
+                            <p>White sauce, truffle oil, mushrooms.</p>
+                            <div class="price-row">
+                                <span class="price">$17.50</span>
+                                <button class="add-btn" onclick="app.addToCart(108)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BURGERS 8 Items -->
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p9.jpg" alt="Beef Burger">
+                        </div>
+                        <div class="card-details">
+                            <h3>Classic Beef</h3>
+                            <p>Quarter pounder, cheddar, lettuce.</p>
+                            <div class="price-row">
+                                <span class="price">$9.99</span>
+                                <button class="add-btn" onclick="app.addToCart(201)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p10.jpg" alt="Chicken Burger">
+                        </div>
+                        <div class="card-details">
+                            <h3>Crispy Chicken</h3>
+                            <p>Fried chicken breast, mayo, pickle.</p>
+                            <div class="price-row">
+                                <span class="price">$8.99</span>
+                                <button class="add-btn" onclick="app.addToCart(202)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p11.jpg" alt="Bacon Burger">
+                            <span class="tag">New</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Bacon Smash</h3>
+                            <p>Double patty, smoked bacon.</p>
+                            <div class="price-row">
+                                <span class="price">$11.50</span>
+                                <button class="add-btn" onclick="app.addToCart(203)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p12.jpg" alt="Mushroom Burger">
+                        </div>
+                        <div class="card-details">
+                            <h3>Mushroom Swiss</h3>
+                            <p>Sautéed mushrooms, swiss cheese.</p>
+                            <div class="price-row">
+                                <span class="price">$10.99</span>
+                                <button class="add-btn" onclick="app.addToCart(204)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p13.jpg" alt="Jalapeno Burger">
+                        </div>
+                        <div class="card-details">
+                            <h3>Spicy Jalapeno</h3>
+                            <p>Fresh jalapenos, pepper jack cheese.</p>
+                            <div class="price-row">
+                                <span class="price">$10.50</span>
+                                <button class="add-btn" onclick="app.addToCart(205)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p14.jpg" alt="Vegan Burger">
+                            <span class="tag">Vegan</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Beyond Burger</h3>
+                            <p>Plant-based patty, vegan cheese.</p>
+                            <div class="price-row">
+                                <span class="price">$12.00</span>
+                                <button class="add-btn" onclick="app.addToCart(206)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p15.jpg" alt="Fish Burger">
+                        </div>
+                        <div class="card-details">
+                            <h3>Filet-O-Fish</h3>
+                            <p>Breaded cod fillet, tartar sauce.</p>
+                            <div class="price-row">
+                                <span class="price">$9.50</span>
+                                <button class="add-btn" onclick="app.addToCart(207)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="burger">
+                        <div class="card-image">
+                            <img src="p16.jpg" alt="BBQ Burger">
+                        </div>
+                        <div class="card-details">
+                            <h3>Texas BBQ</h3>
+                            <p>Onion rings, bbq sauce, beef.</p>
+                            <div class="price-row">
+                                <span class="price">$11.99</span>
+                                <button class="add-btn" onclick="app.addToCart(208)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SIDES (8 Items) -->
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image">
+                            <img src="p17.jpg" alt="Fries">
+                        </div>
+                        <div class="card-details">
+                            <h3>French Fries</h3>
+                            <p>Crispy golden salted fries.</p>
+                            <div class="price-row">
+                                <span class="price">$3.99</span>
+                                <button class="add-btn" onclick="app.addToCart(301)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image">
+                            <img src="p18.jpg" alt="Onion Rings">
+                        </div>
+                        <div class="card-details">
+                            <h3>Onion Rings</h3>
+                            <p>Batter fried onion rings.</p>
+                            <div class="price-row">
+                                <span class="price">$4.50</span>
+                                <button class="add-btn" onclick="app.addToCart(302)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Repeating structure for line count as requested -->
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image"><img src="p19.jpg" alt="Mozz Sticks"></div>
+                        <div class="card-details">
+                            <h3>Mozzarella Sticks</h3>
+                            <p>With marinara dipping sauce.</p>
+                            <div class="price-row"><span class="price">$5.99</span><button class="add-btn" onclick="app.addToCart(303)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image"><img src="p20.jpg" alt="Wings"></div>
+                        <div class="card-details">
+                            <h3>Spicy Wings</h3>
+                            <p>6pc buffalo wings.</p>
+                            <div class="price-row"><span class="price">$7.99</span><button class="add-btn" onclick="app.addToCart(304)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image"><img src="p21.jpg" alt="Salad"></div>
+                        <div class="card-details">
+                            <h3>Caesar Salad</h3>
+                            <p>Fresh romaine, parmesan.</p>
+                            <div class="price-row"><span class="price">$6.50</span><button class="add-btn" onclick="app.addToCart(305)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image"><img src="p22.jpg" alt="Garlic Bread"></div>
+                        <div class="card-details">
+                            <h3>Garlic Bread</h3>
+                            <p>Toasted with garlic butter.</p>
+                            <div class="price-row"><span class="price">$3.50</span><button class="add-btn" onclick="app.addToCart(306)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image"><img src="p23.jpg" alt="Coleslaw"></div>
+                        <div class="card-details">
+                            <h3>Coleslaw</h3>
+                            <p>Creamy cabbage slaw.</p>
+                            <div class="price-row"><span class="price">$2.99</span><button class="add-btn" onclick="app.addToCart(307)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="sides">
+                        <div class="card-image"><img src="p24.jpg" alt="Wedges"></div>
+                        <div class="card-details">
+                            <h3>Potato Wedges</h3>
+                            <p>Seasoned thick cut fries.</p>
+                            <div class="price-row"><span class="price">$4.50</span><button class="add-btn" onclick="app.addToCart(308)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <!-- DRINKS (8 Items) -->
+                    <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p25.jpg" alt="Cola"></div>
+                        <div class="card-details">
+                            <h3>Cola</h3>
+                            <p>Chilled soda.</p>
+                            <div class="price-row"><span class="price">$1.99</span><button class="add-btn" onclick="app.addToCart(401)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p26.jpg" alt="Shake"></div>
+                        <div class="card-details">
+                            <h3>Milkshake</h3>
+                            <p>Strawberry or Chocolate.</p>
+                            <div class="price-row"><span class="price">$4.99</span><button class="add-btn" onclick="app.addToCart(402)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p27.jpg" alt="Coffee"></div>
+                        <div class="card-details">
+                            <h3>Iced Coffee</h3>
+                            <p>Cold brew with milk.</p>
+                            <div class="price-row"><span class="price">$3.50</span><button class="add-btn" onclick="app.addToCart(403)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p28.jpg" alt="Lemonade"></div>
+                        <div class="card-details">
+                            <h3>Lemonade</h3>
+                            <p>Freshly squeezed.</p>
+                            <div class="price-row"><span class="price">$2.99</span><button class="add-btn" onclick="app.addToCart(404)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p29.jpg" alt="Juice"></div>
+                        <div class="card-details">
+                            <h3>Orange Juice</h3>
+                            <p>Fresh pressed.</p>
+                            <div class="price-row"><span class="price">$3.50</span><button class="add-btn" onclick="app.addToCart(405)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p30.jpg" alt="Water"></div>
+                        <div class="card-details">
+                            <h3>Mineral Water</h3>
+                            <p>Spring water bottle.</p>
+                            <div class="price-row"><span class="price">$1.50</span><button class="add-btn" onclick="app.addToCart(406)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                     <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p31.jpg" alt="Mojito"></div>
+                        <div class="card-details">
+                            <h3>Virgin Mojito</h3>
+                            <p>Mint and lime cooler.</p>
+                            <div class="price-row"><span class="price">$3.99</span><button class="add-btn" onclick="app.addToCart(407)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                     <div class="product-card" data-cat="drinks">
+                        <div class="card-image"><img src="p32.jpg" alt="Tea"></div>
+                        <div class="card-details">
+                            <h3>Iced Tea</h3>
+                            <p>Peach or Lemon flavor.</p>
+                            <div class="price-row"><span class="price">$2.50</span><button class="add-btn" onclick="app.addToCart(408)"><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SERVICES SECTION -->
+        <section id="services" class="view">
+            <div class="container">
+                <h2 class="section-title text-center">OUR SERVICES</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <i class="fas fa-motorcycle"></i>
+                        <h3>Online Ordering</h3>
+                        <p>Seamless web experience to order from any device.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Takeaway</h3>
+                        <p>Grab and go options available at all our outlets.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Catering</h3>
+                        <p>We handle food for birthdays, parties, and events.</p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Dine In</h3>
+                        <p>Experience our space-themed ambiance in person.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. BLOG SECTION -->
+        <section id="blog" class="view">
+            <div class="container">
+                <h2 class="section-title text-center">FOOD BLOG</h2>
+                <div class="blog-grid">
+                    <article class="blog-post">
+                        <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500');"></div>
+                        <div class="blog-content">
+                            <h3>The Secret to Sourdough</h3>
+                            <p>Why our crust is fermented for 48 hours.</p>
+                            <button class="read-more">Read More</button>
+                        </div>
+                    </article>
+                    <article class="blog-post">
+                        <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500');"></div>
+                        <div class="blog-content">
+                            <h3>Top 5 Burger Toppings</h3>
+                            <p>We rank the best toppings for 2025.</p>
+                            <button class="read-more">Read More</button>
+                        </div>
+                    </article>
+                    <article class="blog-post">
+                        <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=500');"></div>
+                        <div class="blog-content">
+                            <h3>Pasta Perfection</h3>
+                            <p>How to make restaurant quality pasta at home.</p>
+                            <button class="read-more">Read More</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section> 
+
+        <!-- 5. ABOUT SECTION -->
+        <section id="about" class="view">
+            <div class="container">
+                <div class="split-layout">
+                    <div class="about-img">
+                        <img src="p33.jpg"width=500 alt="Chefs">
+                    </div>
+                    <div class="about-content">
+                        <h2>WHO WE ARE</h2>
+                        <p class="lead">Pizza Planet was founded in 2025 with a simple mission: Serve the galaxy's best food.</p>
+                        <p>We believe in quality over quantity. Every dough is hand-tossed, every vegetable is hand-picked, and every sauce is made in-house daily.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> 100% Organic Ingredients</li>
+                            <li><i class="fas fa-check"></i> Zero Waste Policy</li>
+                            <li><i class="fas fa-check"></i> Community Driven</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CONTACT SECTION -->
+        <section id="contact" class="view">
+            <div class="container">
+                <h2 class="section-title text-center">CONTACT US</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <i class="fas fa-phone"></i>
+                            <h4>Phone</h4>
+                            <p>+92 3280120113</p>
+                        </div>
+                        <div class="contact-card">
+                            <i class="fas fa-envelope"></i>
+                            <h4>Email</h4>
+                            <p>pizzaplanet@gmail.com</p>
+                        </div>
+                        <div class="contact-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>Location</h4>
+                            <p>Fazal Colony, Chiniot</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. FEEDBACK SECTION -->
+        <section id="feedback" class="view">
+            <div class="container">
+                <div class="form-container">
+                    <h2>WE VALUE YOUR FEEDBACK</h2>
+                    <form id="feedback-form">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Your Email</label>
+                            <input type="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <select>
+                                <option>5 - Excellent</option>
+                                <option>4 - Good</option>
+                                <option>3 - Average</option>
+                                <option>2 - Poor</option>
+                                <option>1 - Terrible</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea rows="5" required placeholder="Tell us about your experience..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width">SUBMIT FEEDBACK</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 
+         MODALS & DRAWERS
+     -->
+    
+    <!-- Cart Sidebar -->
+    <div id="cart-overlay" class="overlay" onclick="app.toggleCart()"></div>
+    <aside id="cart-sidebar" class="cart-drawer">
+        <div class="cart-header">
+            <h3>YOUR CART</h3>
+            <button class="close-btn" onclick="app.toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cart-body" class="cart-body">
+            <!-- Cart Items injected via JS -->
+            <div class="empty-state">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="btn btn-primary full-width" onclick="alert('Checkout functionality coming soon!')">CHECKOUT</button>
+        </div>
+    </aside>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <button class="close-search" onclick="app.toggleSearch()"><i class="fas fa-times"></i></button>
+        <div class="search-content">
+            <input type="text" id="global-search" placeholder="Type to search..." onkeyup="app.handleSearch()">
+            <div id="search-results"></div>
+        </div>
+    </div>
+
+    <!--
+         FOOTER
+     -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Pizza Planet</h3>
+                    <p>The best food in the universe delivered to you.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" onclick="app.router('home')">Home</a></li>
+                        <li><a href="#" onclick="app.router('menu')">Menu</a></li>
+                        <li><a href="#" onclick="app.router('about')">About</a></li>
+                        <li><a href="#" onclick="app.router('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Opening Hours</h3>
+                    <ul>
+                        <li>Mon-Fri: 9am - 11pm</li>
+                        <li>Sat-Sun: 10am - 12am</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Pizza Planet. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
